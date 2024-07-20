@@ -89,3 +89,19 @@ button:active {
 #toggleSound {
     display: none;
 }
+
+.footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.footer-text {
+    font-weight : bold;
+    text-decoration-line: none;
+    font-size: 0.7rem; 
+    color: #6c757d; 
+}
