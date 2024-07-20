@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+}
+
+.fan-container {
+    position: relative;
+    top: 70px;
+    display: flex;
+    justify-content: center;
+}
+
+.fan-body {
+    position: relative;
+    width: 300px;
+    top: 180px;
+    left: 2px;
+    z-index: -1;
+}
+
+.fan-cover {
+    position: absolute;
+    width: 300px;
+    top: 25px;
+    z-index: 1;
+}
+
+.fan-blades {
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    top: 68.6px;
+    z-index: 0;
+    animation: spin 0s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.modal {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    top: 620px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+}
+
+.modal input {
+    padding: 5px;
+    border: 3px solid #555;
+    border-radius: 5px;
+}
+
+button {
+    padding: 5px;
+    margin: 1px;
+    background: #444;
+    color: #d3d3d3;
+    border: 1px solid #555;
+    border-radius: 5px;
+}
+
+button:active {
+    background: #6b6b6b;
+}
+
+.strength-box {
+    position: absolute;
+    top: -25px;
+    opacity: 1;
+    transition: all 1s;
+}
+
+.who-alert {
+    position: absolute;
+    top: -55px;
+    font-size: 16px;
+    transition: opacity 0.5s;
+}
+
+.who-alert p {
+    opacity: 1;
+}
+
+#toggleSound {
+    display: none;
+}

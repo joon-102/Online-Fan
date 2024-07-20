@@ -1,0 +1,24 @@
+{
+  "name": "myfan",
+  "version": "0.0.1",
+  "description": "my online fan",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joon-102/myfan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joon-102/myfan/issues",
+    "email": "joon_1@outlook.kr"
+  },
+  "homepage": "https://github.com/joon-102/afreecatv.js#readme",
+  "author": "joon1",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}

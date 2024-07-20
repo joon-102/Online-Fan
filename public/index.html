@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <title>Online Fan</title>
+
+</head>
+
+<body>
+
+    <div class="fan-container">
+        <div class="strength-box">
+            <h3 class="strength"></h3>
+        </div>
+        <div class="who-alert">
+            <p></p>
+        </div>
+
+        <img src="fan-body.png" class="fan-body" alt="Fan Body">
+        <img src="fan-blades.png" class="fan-blades" alt="Fan Blades">
+        <img src="fan-cover.png" class="fan-cover" alt="Fan Cover">
+    </div>
+
+    <div class="modal">
+
+        <button class="plus" style="display : none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+                viewBox="0 0 16 16">
+                <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+            </svg>
+        </button>
+        <button class="minus" style="display : none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash"
+                viewBox="0 0 16 16">
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+            </svg></button>
+        <button id="toggleSound"></button>
+        <div class="modal-inner">
+            <input placeholder="닉네임" maxlength="5">
+            <button class="ok">OK</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+        integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
+        crossorigin="anonymous"></script>
+    <script src="fanSound.js"></script>
+    <script>
+        var strengthElement = document.querySelector('.strength')
+        var whoAlertElement = document.querySelector('.who-alert')
+
+        var username = ''
+        document.querySelector('.ok').addEventListener('click', () => {
+            const input = document.querySelector('input');
+            const username = input.value || 'User';
+
+            document.querySelector('.modal-inner').style.display = 'none';
+
+            const elementsToShow = ['#toggleSound', '.plus', '.minus'];
+            elementsToShow.forEach(selector => document.querySelector(selector).style.display = 'flex');
+
+            document.querySelector('.fan-blades').style.animation = 'spin 0.5s linear infinite';
+
+            turnOn();
+        });
+
+    </script>
+
+</body>
+
+</html>
