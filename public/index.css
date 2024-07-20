@@ -34,8 +34,13 @@ body {
 }
 
 @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .modal {
@@ -90,18 +95,43 @@ button:active {
     display: none;
 }
 
+.real-time {
+    display: none;
+    position: absolute;
+    top: 70px;
+    background: #444;
+    color: #d3d3d3;
+    animation: rainbow 5s infinite;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.real-time:hover {
+    transform: scale(1.1);
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
 .footer {
     position: fixed;
     width: 100%;
     bottom: 0;
     display: flex;
     justify-content: center;
-    
+
 }
 
 .footer-text {
-    font-weight : bold;
+    font-weight: bold;
     text-decoration-line: none;
-    font-size: 0.7rem; 
-    color: #6c757d; 
+    font-size: 0.7rem;
+    color: #6c757d;
 }

@@ -1,11 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const toggleSoundButton = document.getElementById('toggleSound');
+    const whoAlertElement = document.querySelector('.who-alert');
     const strengthDisplay = document.querySelector('.strength');
     const fanBlades = document.querySelector('.fan-blades');
+    const toggleOnlineButton = document.querySelector('.real-time');
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     let isPlaying = false;
     let noiseNode, gainNode;
     let step = 1;
+    let socket;
+    let isOnline = false;
 
     const icons = {
         unmute: `
@@ -73,12 +77,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function adjustVolume(increase) {
-        if (increase && step < 5) {
-            step++;
-            gainNode.gain.value = Math.min(gainNode.gain.value + 0.1, 1.0);
-        } else if (!increase && step > 1) {
-            step--;
-            gainNode.gain.value = Math.max(gainNode.gain.value - 0.1, 0.0);
+        if (isOnline) {
+            if (increase && step < 5) {
+                step++;
+                socket.emit("plus", { step: step, username: globalThis.username });
+            } else if (!increase && step > 1) {
+                step--;
+                socket.emit("minus", { step: step, username: globalThis.username });
+            }
+        } else {
+            if (increase && step < 5) {
+                step++;
+                gainNode.gain.value = Math.min(gainNode.gain.value + 0.1, 1.0);
+            } else if (!increase && step > 1) {
+                step--;
+                gainNode.gain.value = Math.max(gainNode.gain.value - 0.1, 0.0);
+            }
         }
         updateDisplay();
     }
@@ -87,8 +101,38 @@ document.addEventListener('DOMContentLoaded', () => {
         isPlaying ? stopFanSound() : startFanSound(); // 신문법 거의 처음 써봄 키읔
     });
 
-    document.querySelector('.ok').addEventListener('click', startFanSound);
+    function webSocket() {
+        if (!socket) {
+            socket = io({ path: '/socket.io' });
 
+            socket.on("connect", () => {
+                socket.on("step", (data) => {
+                    step = data.step;
+                    whoAlertElement.innerHTML = `<p>수정자 : ${data.username}</p>`;
+                    updateDisplay()
+                });
+            })
+        }
+
+        if (isOnline == true) {
+            isOnline = false;
+            toggleOnlineButton.innerHTML = `Start Online mode`
+            whoAlertElement.innerHTML = `<p></p>`;
+            toggleOnlineButton.style.background = '#444'
+            toggleOnlineButton.style.color = '#d3d3d3'
+
+            socket.off('step')
+            socket.off('connect')
+        } else {
+            isOnline = true;
+            toggleOnlineButton.innerHTML = `Stop Online mode`
+            toggleOnlineButton.style.background = 'linear-gradient(in hsl longer hue 45deg, rgba(255, 0, 0, 0.537) 0 0)'
+            toggleOnlineButton.style.color = 'black'
+        }
+    }
+
+    document.querySelector('.real-time').addEventListener('click', webSocket);
+    document.querySelector('.ok').addEventListener('click', startFanSound);
     document.querySelector('.plus').addEventListener('click', () => adjustVolume(true));
     document.querySelector('.minus').addEventListener('click', () => adjustVolume(false));
 });

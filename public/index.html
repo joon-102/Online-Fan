@@ -50,7 +50,7 @@
             <input placeholder="닉네임" maxlength="5">
             <button class="ok">OK</button>
         </div>
-
+        <button class="real-time">Start Online mode</button>
     </div>
 
     <footer class="footer">
@@ -64,20 +64,18 @@
     <script>
         var strengthElement = document.querySelector('.strength')
         var whoAlertElement = document.querySelector('.who-alert')
-
-        var username = ''
+        
+        globalThis.username = ''
         document.querySelector('.ok').addEventListener('click', () => {
             const input = document.querySelector('input');
-            const username = input.value || 'User';
+            globalThis.username = input.value || 'User';
 
             document.querySelector('.modal-inner').style.display = 'none';
 
-            const elementsToShow = ['#toggleSound', '.plus', '.minus'];
+            const elementsToShow = ['#toggleSound', '.plus', '.minus', '.real-time'];
             elementsToShow.forEach(selector => document.querySelector(selector).style.display = 'flex');
 
             document.querySelector('.fan-blades').style.animation = 'spin 0.5s linear infinite';
-
-            turnOn();
         });
 
     </script>
