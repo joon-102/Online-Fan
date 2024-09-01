@@ -2,7 +2,7 @@
 
 https://myfan-online.vercel.app
 
-# Preview 🖼️
+## Preview 🖼️
 <img alt="2" width="200" src="https://i.imgur.com/navujSs_d.webp?maxwidth=760&fidelity=grand">   
 
 ## Getting Started 💻 
