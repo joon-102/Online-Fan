@@ -14,6 +14,6 @@ npm start
 ```
 This will launch app at http://localhost:3000.
 
-# Warning ⚠️
+## Warning ⚠️
 > myfan-online.vercel.app does not support vercel websocket, so online functions cannot be used.  
-> This project was inspired by this video: https://youtu.be/bn59L-ar744
+> **This project was inspired by this video: https://youtu.be/bn59L-ar744**
